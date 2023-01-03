@@ -1,0 +1,9 @@
+#js-root {
+    color: blue;
+}
+
+#react-root {
+    border: 2px solid blue;
+    padding: 0px 16px;
+    background-color: skyblue;
+}
