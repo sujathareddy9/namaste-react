@@ -1,3 +1,21 @@
+// *** HMR - Hot Module Reloading
+// ** File watchers algorithm - C++
+// BUNDLING
+// MINIFY
+// Cleaning our Code
+// Dev and Production Build
+// Super Fast build alagrithm
+// Image Optimaization
+// Caching while development
+// Compression
+// Parcel also Compatable with older version of 
+// HTTPS on dev
+// Port number
+// Consistent Hashing Alagarithm
+// Parcel is Zero Config
+
+import React from "react";
+import ReactDOM from "react-dom/client";
 // Create root
 const reactRoot = ReactDOM.createRoot(document.getElementById("react-root"));
 
@@ -5,7 +23,7 @@ const reactRoot = ReactDOM.createRoot(document.getElementById("react-root"));
 const reactHeader = React.createElement(
   "h1",
   { id: "header", key: 0 },
-  "Hello from React"
+  "Hello from React parcel"
 );
 
 // Create a new h2 element
