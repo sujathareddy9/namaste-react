@@ -1,7 +1,8 @@
-const Footer = () => {
+export const Footer = () => {
     return (
-        <h4>Footer 2023</h4>
-    )
-}
-
-export default Footer;
+      <div className="footer">
+        <h4>Developed By Suji</h4>
+        <h3 className="footerText">HungerBox</h3>
+      </div>
+    );
+  };
