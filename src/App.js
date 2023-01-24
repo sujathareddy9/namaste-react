@@ -1,40 +1,60 @@
-import React from "react";
+import React, { Children } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import ResturantCard from "./components/ResturantCard";
+import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import About from "./components/About";
+import Error from "./components/Error";
+import Contact from "./components/Contact";
+import RestaurantMenu from "./components/RestaurantMenu";
+import RestaurantCard from "./components/RestaurantCard";
 import Constants from "./components/Constants";
-// import { IMG_CDN_URL } from "./constants";
-// import * as OBJ from "./components/Header";
-// import { Title } from "./components/Header";
+import Login from "./components/Login";
 
-/**
- * Header
- *  -Logo
- *  -List Item
- * Body
- *  - Search Bar
- *  -Restraunt List
- *    -Restraunt Card
- *    -Image
- *     - Name
- *     -Rating
- *       -Cuisines
- * Footer
- */
+
 
 const AppLayout = () => {
   return (
     <>
-      {/* <OBJ.Header/> */}
+    //JSX should have only one parent. and if you dont want to use extra div you should use react.fragment. Its empty tag <></>
+    <React.Fragment>
       <Header />
-      <Body />
+      {/* <About /> */}
+      {/* <Body /> */}
+      <Outlet/>
       <Footer />
+    </React.Fragment>
     </>
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout/>,
+    errorElement: <Error />,
+    // errorElement:<ErrorPage/>,
+    children: [
+      {
+        path: "/About",
+        element:<About />
+      },
+      {
+        path: "/",
+        element:<Body />
+      },
+      {
+        path: "/contact",
+        element:<Contact />
+      },
+      {
+        path: "/restaurant/:Id",
+        element:<RestaurantMenu />
+      },
+    ],
+  },
+])
 
-root.render(AppLayout());
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter} />);

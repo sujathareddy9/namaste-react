@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react";
-import Shimmer from "./Shimmer";
-import ResturantCard from "./ResturantCard";
+import { useState } from "react";
+import  Logo from "../assets/img/food-villa-logo.png";
+import { Link } from "react-router-dom";
+
 const loggedInUser = () => {
-  //API TO AUTHENTICATE USER
-  return false;
+  //some api call to check authentication
+  return true;
 };
+// SPA -- Single page Application
+// 2 Types of Routings--(1. Client side routing, 2. Serverside Routing). 
 
-const Title = () => {
-  return (
-    <a href="/">
-      <img
-        className="logo"
-        src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
-        alt="None"
-      ></img>
-    </a>
-  );
-};
+const Title = () => (
+  <a href="/">
+    <img alt="logo" className="logo" src={Logo}></img>
+  </a>
+);
 
-export const Header = () => {
+const Header = () => {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
@@ -26,9 +24,15 @@ export const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact Us</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>
@@ -40,4 +44,5 @@ export const Header = () => {
     </div>
   );
 };
+
 export default Header;

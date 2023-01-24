@@ -1,4 +1,4 @@
-export const Footer = () => {
+ const Footer = () => {
     return (
       <div className="footer">
         <h4>Developed By Suji</h4>
@@ -6,3 +6,4 @@ export const Footer = () => {
       </div>
     );
   };
+  export default Footer;
