@@ -11,6 +11,9 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import RestaurantCard from "./components/RestaurantCard";
 import Constants from "./components/Constants";
 import Login from "./components/Login";
+import Profile from "./components/Profile";
+import ChildClass from "./components/ChildClass";
+
 
 
 
@@ -37,20 +40,26 @@ const appRouter = createBrowserRouter([
     // errorElement:<ErrorPage/>,
     children: [
       {
-        path: "/About",
-        element:<About />
+        path: "/about",
+        element:<About />,
+        children: [
+          {
+          path: "profile",  // parentpath/{path}=>local host: 1244/about/profile.
+          element: <Profile />,
+        },
+      ],
       },
       {
         path: "/",
-        element:<Body />
+        element:<Body />,
       },
       {
         path: "/contact",
-        element:<Contact />
+        element:<Contact />,
       },
       {
         path: "/restaurant/:Id",
-        element:<RestaurantMenu />
+        element:<RestaurantMenu />,
       },
     ],
   },
