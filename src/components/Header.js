@@ -1,6 +1,9 @@
 import { useState } from "react";
 import  Logo from "../assets/img/food-villa-logo.png";
 import { Link } from "react-router-dom";
+import useRestaurant from "../utils/useRestaurant";
+import useOnline from "../utils/useOnline";
+
 
 const loggedInUser = () => {
   //some api call to check authentication
@@ -17,11 +20,14 @@ const Title = () => (
 
 const Header = () => {
 
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [getLocalVariables, setLocalVariavles] = useLocalStorage();
+  // const isOnline = useOnline();
 
   return (
     <div className="header">
-      <Title />
+      <Title /> 
       <div className="nav-items">
         <ul>
           <li>
@@ -33,16 +39,20 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
+          <li>
+            <Link to="/instamart">Instamart</Link>
+          </li>
           <li>Cart</li>
         </ul>
       </div>
-      {isLoggedIn ? (
+      {/* <h1>{isOnline}</h1> */}
+      {isLoggedIn ? ( 
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
       ) : (
         <button onClick={() => setIsLoggedIn(true)}>Login</button>
       )}
     </div>
   );
-};
+  };
 
 export default Header;

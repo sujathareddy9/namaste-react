@@ -17,7 +17,7 @@ class ProfileClass extends React.Component{
 
     async componentDidMount(){
         // API Call
-        console.log("Child did mount "+this.props.name);
+         console.log();("Child did mount "+this.props.name);
         let data = await fetch("https://api.github.com/users/sujathareddy9");
         let json = await data.json();
         this.setState({name:json.login});
