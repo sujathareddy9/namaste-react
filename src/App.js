@@ -1,4 +1,4 @@
-import React, { Children, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -19,7 +19,12 @@ import Shimmer from "./components/Shimmer";
 
 
 
-
+//Chunking
+//Code Splitting
+//Dynamic Imports
+//lazy loading
+//On demand load
+//Dynamic Bundling
 
 const AppLayout = () => {
   return (
@@ -35,8 +40,8 @@ const AppLayout = () => {
     </>
   );
 };
-const About = React.lazy(() => import('./component/About'))
-const Instamart = lazy(() => import("./components/pages/Instamart"))
+// const About = React.lazy(() => import('./component/About'));
+// const Instamart = lazy(() => import("./components/pages/Instamart"));
 
 const appRouter = createBrowserRouter([
   {

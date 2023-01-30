@@ -1,38 +1,95 @@
-.header {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* // Normal Native CSS 
+// SCSS
+// inline css
+// Component Libraries - Meterial UI, Base UI, Ant UI, Chakra UI.
+// Styled Components
+
+// Tailwind CSS Framework. 
+        - CSS on the go (In the same file)
+        - reusability 
+        - less bundule size
+        - flexible ui (Customizations)
+        - Tailwind CSS very good documentation.
+        */
+
+
+
+/* .header{
     display: flex;
     justify-content: space-between;
     margin: 10px;
-    border : 1px solid black;
+    border: 1px solid black;
+    background-color: skyblue;
 }
 .nav-items > ul{
-    list-style-type: none;
+    list-style: none;
     display: flex;
 }
 
-.nav-items > ul > li{
-    list-style-type: none;
+.nav-items >ul > li {
+    padding: 10px;
+    color: gold;
+}
+
+.logo {
+    width: 80px;
+    height: 80px; 
     margin: 10px;
 }
-.logo {
-    width: 100px;
-}
-.card > img {
-    width: 100%;
-}
+
 .card {
-    width: 200px;
+    width: 235px;
     border: 1px solid black;
-    padding: 10px;
+    padding:10px;
+    margin: 10px;
 }
+
+.card > img {
+    width:100%;
+}
+
 .restaurant-list {
     display: flex;
-    margin:10px;
     flex-wrap: wrap;
 }
-.Shimmer-card {
-    width: 200px;
-    height: 200px;
-    background: lightgray;
-    margin: 20px;
 
+.button{
+  background-color: black;
+  color: gold;
+  font-size: 20px;
+  height:50px;
+  width: 140px;
+  border-radius: 10px;
+  border: 1px solid gold;
+  margin: 16px 7px;
+  cursor: pointer;
 }
+
+.shimmer-card{
+    width:235px;
+    height: 350px;
+    margin: 10px;
+    background-color: lightgrey;
+}
+
+.link-style {
+    text-decoration: none;
+    padding: 10px;
+    color: gold;
+}
+
+.menu {
+    display: flex;
+}
+
+.body-link-style {
+    all:unset;
+    display: flex;
+} */
