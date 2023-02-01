@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { RestaurantCard } from './RestaurantCard'; //named import 
 import Shimmer from "./Shimmer";
-import { RESTAURANT_LIST } from "./constants";
+import { CLOUD_IMAGE_CDN, FETCH_RESTAURANT_MENU_URL, RESTAURANT_LIST } from "./constants";
 import useOnline from "../utils/useOnline";
 import useLocalStorage from "../utils/useLocalStorage";
 import useRestaurant from "../utils/useRestaurant";
 import filterData from "../utils/helper";
-
-
+import Instamart from "./Instamart";
+// import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchInput, setSearchInput] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-//https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.733078514704896&lng=75.89587446302176&page_type=DESKTOP_WEB_LISTING
+// https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.733078514704896&lng=75.89587446302176&page_type=DESKTOP_WEB_LISTING
   //empty dependency array => once after render
   //dependency array [searchText] => once after initial render + everytime (my searchText changes)
 
@@ -26,6 +26,7 @@ const Body = () => {
     setAllRestaurants(getRestaurants);
     setFilteredRestaurants(getRestaurants);
   }, [getRestaurants]);
+  
 
   const isOnline = useOnline();
 
@@ -66,13 +67,13 @@ const Body = () => {
         {filteredRestaurants?.length === 0 ? (
           <h1>No Restaurant match your search...!!</h1>
         ) : (
-          filteredRestaurants?.map((restaurant) => {
+          filteredRestaurants?.map((restaurants) => {
             return (
               <Link
-                to={"/restaurant/" + restaurant.data.id}
-                key={restaurant.data.id}
+                to={"/restaurants/" + restaurants.data.id}
+                key={restaurants.data.id}
               >
-                <RestaurantCard {...restaurant.data}  />
+                <RestaurantCard {...restaurants.data}  />
               </Link>
             );
           })

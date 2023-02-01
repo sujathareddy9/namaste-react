@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -15,9 +15,74 @@ import Profile from "./components/Profile";
 import ChildClass from "./components/ChildClass";
 import Instamart from "./components/Instamart";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 
+const InstaMart = lazy(() => import("./components/InstaMart"));
+//Upon On Demand Loading -> Upon Render -> Suspend Loading.
+const AppLayout = () => {
+  const [user, setUser]= useState({
+    name: "suji",
+    email: "sujakria@gmail.com",
+  });
+  return (
+    <>
+      <UserContext.Provider value={{
+        user: {
+          name: "Dummy",
+          email: "dummy@gmail.com",
+      },
+        }}>
+      <Header />
+      <Outlet />
+      <Footer />
+      </UserContext.Provider>
+    </>
+  );
+};
 
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/about", // ParentPath/(path) ==> localhost:1234/about/profile
+        element: <About />,
+        children: [
+          {
+            path: "profile",
+            element: <Profile />, // ParentPath/(path) ==> localhost:1234/about/profile
+          },
+        ],
+      },
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <InstaMart />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+]);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(<RouterProvider router={appRouter} />);
 
 //Chunking
 //Code Splitting
@@ -26,60 +91,81 @@ import Shimmer from "./components/Shimmer";
 //On demand load
 //Dynamic Bundling
 
-const AppLayout = () => {
-  return (
-    <>
-    //JSX should have only one parent. and if you dont want to use extra div you should use react.fragment. Its empty tag <></>
-    <React.Fragment>
-      <Header />
-      {/* <About /> */}
-      {/* <Body /> */}
-      <Outlet/>
-      <Footer />
-    </React.Fragment>
-    </>
-  );
-};
+// const AppLayout = () => {
+//   const [user, setUser] = useState({
+//     name: "Namaste React",
+//     email: "sujakria@gmail.com",
+//   });
+//   return (
+//     <>
+//     //JSX should have only one parent. and if you dont want to use extra div you should use react.fragment. Its empty tag <></>
+//     <React.Fragment>
+//       <Header />
+//       <About />
+//       <Body />
+//       <Outlet/>
+//       <Footer />
+//     </React.Fragment>
+//     </>
+//   );
+// };
 // const About = React.lazy(() => import('./component/About'));
 // const Instamart = lazy(() => import("./components/pages/Instamart"));
 
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout/>,
-    errorElement: <Error />,
-    // errorElement:<ErrorPage/>,
-    children: [
-      {
-        path: "/about",
-        element:<About />,
-        children: [
-          {
-          path: "profile",  // parentpath/{path}=>local host: 1244/about/profile.
-          element: <Profile />,
-        },
-      ],
-      },
-      {
-        path: "/",
-        element:<Body />,
-      },
-      {
-        path: "/contact",
-        element:<Contact />,
-      },
-      {
-        path: "/restaurant/:Id",
-        element:<RestaurantMenu />,
-      },
-      {
-        path: "/instamart",
-        element:<Suspense><Instamart />,
-        </Suspense>
-      },
-    ],
-  },
-])
+// const appRouter = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <AppLayout/>,
+//     errorElement: <Error />,
+//     // errorElement:<ErrorPage/>,
+//     children: [
+//       {
+//         path: "/about",
+//         element:<About />,
+//         children: [
+//           {
+//           path: "profile",  // parentpath/{path}=>local host: 1244/about/profile.
+//           element: <Profile />,
+//         },
+//       ],
+//       },
+//       {
+//         path: "/",
+//         element:<Body  />,
+//       },
+//       {
+//         path: "/contact",
+//         element:<Contact />,
+//       },
+//       {
+//         path: "/restaurant/:Id",
+//         element:<RestaurantMenu />,
+//       },
+//       {
+//         path: "/instamart",
+//         element:<Suspense><Instamart />,
+//         </Suspense>
+//       },
+//     ],
+//   },
+// ])
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<RouterProvider router={appRouter} />);
+
+//**AppLayout
+    // (state=user)
+        // Body- user={user} />
+            // Restaurantcontainer =>
+              // restaurantCard user={user}
+                 // <h4>{user}</h4>( this is known as props drilling)
+
+
+
+
+
+
+
+ 
+
+ 
