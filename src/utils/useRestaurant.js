@@ -1,31 +1,33 @@
 import { useEffect, useState } from "react";
-import { GET_RESTAURANTS, RESTAURANT_API,IMG_CDN_URL} from "../components/constants";
+import { GET_RESTAURANTS, RESTAURANT_API, IMG_CDN_URL } from "../components/constants";
 import Instamart from "../components/Instamart";
 
 
 const useRestaurant = (props) => {
-  const [restaurants, setRestaurants] = useState(null);
+    const [restaurants, setRestaurants] = useState(null);
 
-  useEffect(() => {
-    getRestaurantsInfo();
-  }, []);
+    useEffect(() => {
+        getRestaurantsInfo();
+    }, []);
 
-  async function getRestaurantsInfo() {
-    
-    if(props.id !== null) {
-      const data = await fetch(GET_RESTAURANTS + props.id);      
-      const fetchData = await data.json();      
-      setRestaurants(fetchData.data);
+    async function getRestaurantsInfo() {
+
+        if (props.id !== null) {
+            const data = await fetch(GET_RESTAURANTS + props.id);
+            console.log('GET_RESTAURANTS', data)
+            const fetchData = await data.json();
+            setRestaurants(fetchData.data);
+        }
+
+        if (props.id === null) {
+            const data = await fetch(RESTAURANT_API);
+            const fetchJson = await data.json();
+            console.log('RESTAURANT_API', fetchJson)
+            setRestaurants(fetchJson.data.cards[2].data.data.cards);
+        }
     }
-    
-    if(props.id === null) {
-        const data = await fetch(RESTAURANT_API);
-        const fetchJson = await data.json();
-        setRestaurants(fetchJson?.data?.cards[2]?.data?.data?.cards);
-    }
-  }
 
-  return restaurants;
+    return restaurants;
 };
 
 export default useRestaurant;

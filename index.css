@@ -21,7 +21,7 @@
 
 
 
-/* .header{
+.header{
     display: flex;
     justify-content: space-between;
     margin: 10px;
@@ -92,4 +92,4 @@
 .body-link-style {
     all:unset;
     display: flex;
-} */
+}
