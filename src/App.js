@@ -16,6 +16,9 @@ import ChildClass from "./components/ChildClass";
 import Instamart from "./components/Instamart";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 
 const InstaMart = lazy(() => import("./components/InstaMart"));
@@ -26,7 +29,8 @@ const AppLayout = () => {
     email: "sujakria@gmail.com",
   });
   return (
-    <>
+    
+    <Provider store ={store}>
       <UserContext.Provider value={{
         user: {
           name: "Dummy",
@@ -37,7 +41,7 @@ const AppLayout = () => {
       <Outlet />
       <Footer />
       </UserContext.Provider>
-    </>
+    </Provider>
   );
 };
 
@@ -76,6 +80,10 @@ const appRouter = createBrowserRouter([
             <InstaMart />
           </Suspense>
         ),
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
       },
     ],
   },

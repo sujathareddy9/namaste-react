@@ -4,7 +4,9 @@ import  { IMG_CDN_URL, FETCH_RESTAURANT_MENU_URL } from "./Constants";
 import useRestaurant from "../utils/useRestaurant";
 import Shimmer from "./Shimmer";
 import Instamart from "./Instamart";
-
+import UserContext from "../utils/UserContext";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenu = () => {
   const {id} = useParams();
@@ -14,7 +16,9 @@ const RestaurantMenu = () => {
 
   const getRestaurantDetails = () => restaurantMenu && restaurantMenu[2]?.groupedCard?.cardGroupMap.REGULAR.cards[2].card.card
   const getRestaurantName = () => restaurantMenu && restaurantMenu[0]?.card.card.info.name
-
+  const handleAddItem = () => {
+    dispatch(addItem("Grapes"));
+  }
   let restaurantIdentifier;
   if (restaurantMenu) {
       restaurantIdentifier = {
@@ -41,34 +45,38 @@ const RestaurantMenu = () => {
   }
 
   return (
+
           <>
               {
-                  !restaurantMenu ? <ShimmerSkeleton/> :
-                      <div className={"mx-5"}>
-                          <div className={"font-bold text-2xl"}>{getRestaurantName()}</div>
-                          {!favourites?.find((favourite => favourite.name === restaurantIdentifier.name)) ?
-                              <div className={"bg-amber-200 rounded-xl"}
-                                   style={{
-                                       padding: 10,
-                                       marginTop: 5,
-                                       width: "fit-content",
-                                       cursor: "pointer"
-                                   }}
-                                   onClick={addFavourites}
-                              >
-                                  <span style={{fontSize: 19}}>♡</span> Favourite</div>
-                              : <div className={"bg-amber-200 rounded-xl"}
-                                     style={{
-                                         padding: 10,
-                                         marginTop: 5,
-                                         width: "fit-content",
-                                         cursor: "pointer"
-                                     }}
-                                     onClick={removeFavourites}
-                              >
-                                  <span style={{color: "darkred", fontSize: 19}}>♥ </span>Favourite </div>
-                          }
+                        !restaurantMenu ? <ShimmerSkeleton/> :
+                            <div className={"mx-5"}>
+                                <div className={"font-bold text-2xl"}>{getRestaurantName()}</div>
+                                {!favourites?.find((favourite => favourite.name === restaurantIdentifier.name)) ?
+                                    <div className={"bg-amber-200 rounded-xl"}
+                                        style={{
+                                            padding: 10,
+                                            marginTop: 5,
+                                            width: "fit-content",
+                                            cursor: "pointer"
+                                        }}
+                                        onClick={addFavourites}
+                                    >
+                                        <span style={{fontSize: 19}}>♡</span> Favourite</div>
+                                    : <div className={"bg-amber-200 rounded-xl"}
+                                            style={{
+                                                padding: 10,
+                                                marginTop: 5,
+                                                width: "fit-content",
+                                                cursor: "pointer"
+                                            }}
+                                            onClick={removeFavourites}
+                                    >
+                                        <span style={{color: "darkred", fontSize: 19}}>♥ </span>Favourite </div>
+                                }
                           <div className="flex">
+                            <div>
+                                <button className="p-2, m-5 bg-green-100" onClick={()=>handleAddItem}>Add Item</button>
+                            </div>
                               <img src={`${FETCH_RESTAURANT_MENU_URL}${restaurantMenu[0]?.card?.card?.info?.cloudinaryImageId}`}
                                    alt={'restaurantMenu'} className="my-5 rounded-lg shadow-2xl"/>
                               <ul className={"mx-5"}>

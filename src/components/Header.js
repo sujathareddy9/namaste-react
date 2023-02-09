@@ -5,6 +5,7 @@ import useRestaurant from "../utils/useRestaurant";
 import useOnline from "../utils/useOnline";
 import Instamart from "./Instamart";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Title = () => {
   return (
@@ -26,6 +27,7 @@ const Header = () => {
 
   const isOnline = useOnline();
   const { User } = useContext(UserContext);
+  const  cartItems  = useSelector((store) => store.cart.items);
   return (
     <>
       <div className="flex justify-between bg-green-400 border drop-shadow-md">
@@ -41,7 +43,7 @@ const Header = () => {
             <li className="px-2">
               <Link to="/contact">Contact</Link>
             </li>
-            <li className="px-2">Cart</li>
+            <li className="px-2">Cart- 4 items</li>
             <li className="px-2">
               <Link to="/instamart">InstaMart</Link>
             </li>
