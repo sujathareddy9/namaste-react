@@ -1,7 +1,7 @@
 import React from "react";
 
 import { validateObject } from "./config";
-const SignupForm = ({handleUser}) => {
+const Login = ({handleUser}) => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
@@ -36,4 +36,4 @@ const SignupForm = ({handleUser}) => {
     </form>
   );
 };
-export default SignupForm;
+export default Login;

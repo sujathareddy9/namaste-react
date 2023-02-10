@@ -43,6 +43,7 @@ const Body = () => {
     <>
       <div className=" block mx-auto text-center">
         <input
+        data-testid="search-input"
           type="text"
           className="bg-white w-96 border border-yellow-900 my-2  rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-orange-800 sm:text-sm"
           placeholder="Search"
@@ -52,6 +53,7 @@ const Body = () => {
           }}
         />
         <button
+        data-testid="search-btn"
           className=" bg-orange-800 h-10 mb-5 w-28 text-cyan-50 rounded-sm  text-center align-middle py-2 m-4"
           onClick={() => {
             //need to filter the data
@@ -63,7 +65,7 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="flex flex-wrap mx-auto items-center w-4/5l">
+      <div className="flex flex-wrap mx-auto items-center w-4/5l" data-testid="rest-List">
         {filteredRestaurants?.length === 0 ? (
           <h1>No Restaurant match your search...!!</h1>
         ) : (

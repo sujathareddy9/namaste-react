@@ -40,7 +40,8 @@ const RestaurantMenu = () => {
 
   const removeFavourites = () => {
       const leftOverRestaurants = favourites.filter((favourite) =>
-          !(favourite.name === restaurantIdentifier.name && favourite.image === restaurantIdentifier.image))
+          !(favourite.name === restaurantIdentifier.name && 
+            favourite.image === restaurantIdentifier.image))
       setFavourites(leftOverRestaurants)
   }
 
@@ -48,10 +49,11 @@ const RestaurantMenu = () => {
 
           <>
               {
-                        !restaurantMenu ? <ShimmerSkeleton/> :
+                        !restaurantMenu ? <Shimmer /> : 
                             <div className={"mx-5"}>
                                 <div className={"font-bold text-2xl"}>{getRestaurantName()}</div>
-                                {!favourites?.find((favourite => favourite.name === restaurantIdentifier.name)) ?
+                                {!favourites?.find((favourite =>
+                                 favourite.name === restaurantIdentifier.name)) ?
                                     <div className={"bg-amber-200 rounded-xl"}
                                         style={{
                                             padding: 10,
@@ -71,19 +73,22 @@ const RestaurantMenu = () => {
                                             }}
                                             onClick={removeFavourites}
                                     >
-                                        <span style={{color: "darkred", fontSize: 19}}>♥ </span>Favourite </div>
+                                        <span style={{color: "darkred", fontSize: 19}}>♥
+                                         </span>Favourite </div>
                                 }
                           <div className="flex">
                             <div>
-                                <button className="p-2, m-5 bg-green-100" onClick={()=>handleAddItem}>Add Item</button>
+                                <button className="p-2, m-5 bg-green-100" 
+                                onClick={()=>handleAddItem}>Add Item</button>
                             </div>
-                              <img src={`${FETCH_RESTAURANT_MENU_URL}${restaurantMenu[0]?.card?.card?.info?.cloudinaryImageId}`}
+                              <img src=
+                              {`${FETCH_RESTAURANT_MENU_URL}${restaurantMenu[0]?.card?.card?.info?.cloudinaryImageId}`}
                                    alt={'restaurantMenu'} className="my-5 rounded-lg shadow-2xl"/>
-                              <ul className={"mx-5"}>
+                              <ul data-testid="menu"className={"mx-5"}>
                                   {
                                       getRestaurantDetails().itemCards?.map((menuItem, index) => {
                                               if (!restaurantMenu) {
-                                                  return <ShimmerSkeleton/>
+                                                  return <Shimmer />
                                               } else {
                                                   return <li key={index} className="m-5 list-disc font-serif">
                                                       {menuItem?.card?.info?.name}
@@ -98,7 +103,7 @@ const RestaurantMenu = () => {
 
               }
           </>
-  )
-}
+  );
+};
 
-export default RestaurantMenu
+export default RestaurantMenu;

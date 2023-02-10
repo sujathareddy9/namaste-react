@@ -19,36 +19,36 @@ import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Cart from "./components/Cart";
+import { Formik } from "Formik";
 
 
-const InstaMart = lazy(() => import("./components/InstaMart"));
-//Upon On Demand Loading -> Upon Render -> Suspend Loading.
-const AppLayout = () => {
-  const [user, setUser]= useState({
-    name: "suji",
-    email: "sujakria@gmail.com",
-  });
+const App = () => { 
+  const[islogin, setIsLogIn] = useState(false);
+  const[user, setUser] = useState({name:''});
   return (
-    
-    <Provider store ={store}>
-      <UserContext.Provider value={{
-        user: {
-          name: "Dummy",
-          email: "dummy@gmail.com",
-      },
-        }}>
-      <Header />
-      <Outlet />
-      <Footer />
+    <Provider store={store}>
+      <UserContext.Provider value={{user, setUser, islogin, setIsLogIn }}>
+        {!islogin ? (
+          // <Header />
+          <Login />
+        ):(
+          <>
+          <Header />
+          <Outlet />
+          <Footer />
+          </>
+        )}
       </UserContext.Provider>
     </Provider>
   );
 };
 
+
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <App />,
     errorElement: <Error />,
     children: [
       {
@@ -77,7 +77,7 @@ const appRouter = createBrowserRouter([
         path: "/instamart",
         element: (
           <Suspense fallback={<Shimmer />}>
-            <InstaMart />
+            <Instamart />
           </Suspense>
         ),
       },
